@@ -2,48 +2,127 @@
         <head>
             <style>
                 canvas{
-                    background-color: beige;
+                    background-color: rgb(243, 253, 178);
                 }
             </style>
         </head>
         <body>
-            <canvas id="mycanvas" width="500" height="250"></canvas>
+            <canvas id="mycanvas" width="1000" height="600"></canvas>
         <script>
             var canvas = document.getElementById('mycanvas'); 
             var ctx = canvas.getContext('2d');
+            var figura = true;
 
-            ctx.fillStyle = "rgb(125,136,229)";
-            ctx.fillRect (20,20,70,60);
+            ctx.fillStyle= "rgb(205,0,9)"
 
-            ctx.fillStyle = "rgb(205,0,9)";
-            ctx.fillRect (70,60,70,60);
+            canvas.addEventListener("click", (e) => {
 
-            ctx.fillStyle = "rgb(255,105,255,0.5)";
-            ctx.fillRect (120,100,70,60);
+                if  (figura){
+                    ctx.beginPath();
+                    ctx.arc(e.layerX, e.layerY, 50, 0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.stroke();
+
+                }else{
+
+                    ctx.fillRect (e.layerX-50, e.layerY-50,100,100);
+                    ctx.strokeRect (e.layerX-50, e.layerY-50,100,100);
+                }
+                // console.log("hola")
+                // console.log(e);
+
+                
+            })
+
+            canvas.addEventListener("mouseover", (e) => {
+                console.log("mouseover")
+
+                color = random_rgba();
+                ctx.fillStyle= color;
+
+            })
+
+            canvas.addEventListener('mouseout', (e) =>{
+                
+                figura = !figura;
+            })
+
+            function random_rgba() {
+            var o = Math.round, r = Math.random, s = 255;
+            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+            }
+
+            canvas.addEventListener("mousemove", (e) => {
+                console.log("mousemove")
+
+                ctx.beginPath();
+                ctx.arc(e.layerX, e.layerY, 2, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.stroke();
+
+            })
+
+
+
+
+
+
+
+            // ctx.fillStyle = "rgb(125,136,229)";
+            // ctx.fillRect (20,20,70,60);
+
+            // ctx.fillStyle = "rgb(205,0,9)";
+            // ctx.fillRect (70,60,70,60);
+
+            // ctx.fillStyle = "rgb(255,105,255,0.5)";
+            // ctx.fillRect (120,100,70,60);
             
 
 
-            ctx.beginPath();
-            ctx.moveTo(350,10);
-            ctx.lineTo(350,65);
-            ctx.lineTo(200,65);
-            ctx.fill();
-            ctx.closePath();
+            // ctx.beginPath();
+            // ctx.moveTo(350,10);
+            // ctx.lineTo(350,65);
+            // ctx.lineTo(200,65);
+            // ctx.fill();
+            // ctx.closePath();
 
             
-            ctx.beginPath();
-            ctx.moveTo(350,100);
-            ctx.lineTo(350,150);
-            ctx.stroke();
+            // ctx.beginPath();
+            // ctx.moveTo(350,100);
+            // ctx.lineTo(350,150);
+            // ctx.stroke();
 
-            ctx.beginPath();
-            ctx.arc(155, 205, 40, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.stroke();
+            // ctx.beginPath();
+            // ctx.arc(155, 205, 40, 0, 2 * Math.PI);
+            // ctx.fill();
+            // ctx.stroke();
 
-            ctx.beginPath();
-            ctx.arc(255, 205, 40, 0, 2 * Math.PI);
-            ctx.stroke();
+            // ctx.beginPath();
+            // ctx.arc(255, 205, 40, 0, 2 * Math.PI);
+            // ctx.stroke();
+
+            
+            // ctx.font = "20px Georgia";
+            // ctx.fillText("Hello World!", 100, 50);
+            // ctx.font = "20px Georgia";
+            // ctx.strokeText("Hello world!", 104, 54);
+
+
+            // const grd = ctx.createLinearGradient(0, 0, 170, 0);
+            // grd.addColorStop(0, "pink");
+            // grd.addColorStop(1, "black");
+            // ctx.fillStyle = grd;
+            // ctx.fillRect(20, 250, 150, 100);
+
+            // const grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+            // grd.addColorStop(0, "red");
+            // grd.addColorStop(1, "white");
+            // ctx.fillStyle = grd;
+            // ctx.fillRect(100, 10, 150, 100);
+
+
+
+
 
         </script>
         </body>
