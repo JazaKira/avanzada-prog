@@ -1,0 +1,56 @@
+<html>
+        <head>
+            <style>
+                canvas{
+                    background-color: beige;
+                }
+            </style>
+        </head>
+        <body>
+            <canvas id="mycanvas" width="500" height="250"></canvas>
+        <script>
+            var canvas = document.getElementById('mycanvas'); 
+            var ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = "rgb(125,136,229)";
+            ctx.fillRect (20,20,70,60);
+
+            ctx.fillStyle = "rgb(205,0,9)";
+            ctx.fillRect (70,60,70,60);
+
+            ctx.fillStyle = "rgb(255,105,255,0.5)";
+            ctx.fillRect (120,100,70,60);
+            
+
+
+            ctx.beginPath();
+            ctx.moveTo(350,10);
+            ctx.lineTo(350,65);
+            ctx.lineTo(200,65);
+            ctx.fill();
+            ctx.closePath();
+
+            
+            ctx.beginPath();
+            ctx.moveTo(350,100);
+            ctx.lineTo(350,150);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(155, 205, 40, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(255, 205, 40, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            
+            ctx.font = "20px Georgia";
+            ctx.fillText("Hello World!", 100, 50);
+            ctx.font = "20px Georgia";
+            ctx.strokeText("Hello world!", 104, 54);
+
+        </script>
+        </body>
+</html>
