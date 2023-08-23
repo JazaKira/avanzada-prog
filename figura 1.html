@@ -12,8 +12,9 @@
             var canvas = document.getElementById('mycanvas'); 
             var ctx = canvas.getContext('2d');
             var figura = true;
-
+            let pressed = false;
             ctx.fillStyle= "rgb(205,0,9)"
+
 
             canvas.addEventListener("click", (e) => {
 
@@ -52,15 +53,35 @@
             return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
             }
 
-            canvas.addEventListener("mousemove", (e) => {
-                console.log("mousemove")
+            // canvas.addEventListener("mousemove", (e) => {
+            //     console.log("mousemove")
 
-                ctx.beginPath();
-                ctx.arc(e.layerX, e.layerY, 2, 0, 2 * Math.PI);
-                ctx.fill();
-                ctx.stroke();
+            //     ctx.beginPath();
+            //     ctx.arc(e.layerX, e.layerY, 2, 0, 2 * Math.PI);
+            //     ctx.fill();
+            //     ctx.stroke();
 
+            // })
+            canvas.addEventListener('mousemove', (e) => {
+
+                if (pressed) {
+
+                    ctx.beginPath();
+                    ctx.arc(e.layerX, e.layerY, 2, 0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.stroke();
+
+                }
+            });
+            canvas.addEventListener('mousedown', (e) => {
+                pressed = true;
+            });
+            canvas.addEventListener('mouseup', (e) => {
+                pressed = false;
             })
+
+
+
 
 
 
@@ -127,3 +148,7 @@
         </script>
         </body>
 </html>
+                 
+           
+            
+           
