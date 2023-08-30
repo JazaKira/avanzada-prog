@@ -1,0 +1,109 @@
+<html>
+        <head>
+            <style>
+                canvas{
+                    background-color: rgb(178, 223, 253);
+                    
+                }
+            </style>
+        </head>
+        <body>
+            <canvas id="mycanvas" width="1000" height="600"></canvas>
+        <script>
+            var canvas = document.getElementById('mycanvas'); 
+            var ctx = canvas.getContext('2d');
+            var figura = true;
+            let pressed = false;
+            ctx.fillStyle= "rgb(205,0,9)"
+
+
+            const my_gradient = ctx.createLinearGradient(0, 0, 0, 170);
+            my_gradient.addColorStop(0, "#021358");
+            my_gradient.addColorStop(0.5, "#011C8C")
+            my_gradient.addColorStop(1, "#0327BD")
+            ctx.fillStyle = my_gradient;
+            ctx.fillRect(0, 0, 1000, 600); 
+
+            
+            
+            ctx.beginPath();
+            ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+            ctx.fillStyle = "#C3C7CF";
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.moveTo(280,300);
+            ctx.lineTo(540,455);
+            ctx.lineTo(0,455);
+            ctx.fillStyle = "#0C0B0B";
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.moveTo(480,300);
+            ctx.lineTo(840,455);
+            ctx.lineTo(240,455);
+            ctx.fillStyle = "#393636";
+            ctx.fill();
+            ctx.closePath();
+
+
+            ctx.beginPath();
+            ctx.moveTo(880,300);
+            ctx.lineTo(1000,455);
+            ctx.lineTo(440,455);
+            ctx.fillStyle = "#4B4B4B";
+            ctx.fill();
+            ctx.closePath();
+
+
+            ctx.rect(0, 450, 1000, 650);
+            ctx.fillStyle = "#000000";
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.rect(200, 350, 90, 60);
+            ctx.fillStyle = "#DEC301";
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.rect(200, 405, 150, 60);
+            ctx.fillStyle = "#DEC301";
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.rect(40, 420, 200, 40);
+            ctx.fillStyle = "#DEC301";
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(200, 455, 30, 0, 2 * Math.PI);
+            ctx.fillStyle = "#C3C7CF";
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(350, 455, 30, 0, 2 * Math.PI);
+            ctx.fillStyle = "#C3C7CF";
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(350, 455, 30, 0, 2 * Math.PI);
+            ctx.fillStyle = "#C3C7CF";
+            ctx.fill();
+            ctx.closePath();
+
+          
+
+            
+
+
+        </script>
+        </body>
+</html>
