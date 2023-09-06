@@ -1,0 +1,200 @@
+<html>
+
+<head>
+    <style>
+        canvas {
+            background-color: rgb(178, 223, 253);
+            border: 4px solid black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1000" height="600"></canvas>
+    <script>
+
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        var x = 225, y = 225;
+        var cuadroW = 40, cuadroH = 40;
+        var dir = 0, speed = 5;
+        var tx = 0, ty = 0;
+        var score = 0, pause = false;
+
+        class Cuadradito {
+            constructor(x, y, w, h, color) {
+                this.x = x;
+                this.y = y;
+                this.w = w;
+                this.h = h;
+                this.color = color;
+            }
+            paint(ctx) {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.w, this.h);
+                ctx.strokeRect(this.x, this.y, this.w, this.h);
+            }
+        }
+
+        const player = new Cuadradito(225, 225, cuadroW, cuadroH, "pink")
+        const target = new Cuadradito(randomInteger(460), randomInteger(460), 25, 25, "pink");
+        const walls = [];
+
+        walls.push(new Cuadradito(100, 80, 800, 30, "pink"));
+        walls.push(new Cuadradito(100, 500, 800, 30, "pink"));
+        walls.push(new Cuadradito(500, 300, 200, 30, "pink"));
+        walls.push(new Cuadradito(65, 183, 30, 250, "pink"));
+        walls.push(new Cuadradito(300, 183, 30, 250, "pink"));
+        walls.push(new Cuadradito(900, 183, 30, 250, "pink"));
+
+
+
+        function seTocan(target) {
+            if (this.x < target.x + target.w &&
+                this.x + this.w > target.x &&
+                this.y < target.y + target.h &&
+                this.y + this.h > target.y) {
+                return true;
+            }
+
+            return false;
+        }
+
+        window.requestAnimationFrame = (function () {
+            return window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 17);
+                };
+        }()
+        );
+
+        document.addEventListener("keydown", (e) => {
+
+            switch (e.keyCode) {
+                case 87:
+                    dir = 1;
+                    break;
+                case 83:
+                    dir = 2;
+                    break;
+                case 68:
+                    dir = 3;
+                    break;
+                case 65:
+                    dir = 4;
+                    break;
+                case 32:
+                    pause = !pause;
+                    break;
+            }
+
+        })
+
+        function update() {
+
+            if (!pause) {
+                if (dir == 1) {
+                    player.y -= speed;
+                    if (player.y + 50 < 0) {
+                        player.y = 550;
+                    }
+                }
+                if (dir == 2) {
+                    player.y += speed;
+                    if (player.y + 50 > 500) {
+                        player.y = -50;
+                    }
+                }
+                if (dir == 3) {
+                    player.x += speed;
+                    if (player.x + 50 > 500) {
+                        player.x = -50;
+                    }
+                }
+                if (dir == 4) {
+                    player.x -= speed;
+                    if (player.x + 50 < 0) {
+                        player.x = 550;
+                    }
+                }
+
+                if (seTocan.call(player, target)) {
+                    target.x = randomInteger(460);
+                    target.y = randomInteger(460);
+                    score += 10;
+                }
+
+                for (let i = 0; i < walls.length; i++) {
+                    if (seTocan.call(player, walls[i])) {
+                        if (dir == 1) {
+                            player.y += speed;
+                        }
+                        if (dir == 2) {
+                            player.y -= speed;
+                        }
+                        if (dir == 3) {
+                            player.x -= speed;
+                        }
+                        if (dir == 4) {
+                            player.x += speed;
+                        }
+                    }
+                    if (seTocan.call(target, walls[i])) {
+
+                        target.x = randomInteger(460);
+                        target.y = randomInteger(460);
+                    }
+                }
+            }
+
+            paint();
+            window.requestAnimationFrame(update);
+        }
+
+        function paint() {
+            ctx.fillStyle = "bisque";
+            ctx.fillRect(0, 0, 1000, 600);
+
+            ctx.font = "25px Arial Black";
+            ctx.fillStyle = "Crimson";
+            ctx.fillStyle = "red";
+            ctx.fillText("Score: " + score, 10, 30);
+
+            player.paint(ctx);
+            player.color = randomRgbColor();
+
+            target.paint(ctx);
+
+            for (let i = 0; i < walls.length; i++) {
+                walls[i].paint(ctx);
+            }
+
+            if (pause) {
+                ctx.fillStyle = "rgba(255, 255, 156, 253)";
+                ctx.fillRect(0, 0, 1000, 600);
+
+                ctx.font = "50px Arial Black";
+                ctx.fillStyle = "Crimson";
+                ctx.fillText("P A U S A", 350, 300);
+
+            }
+        }
+
+        update();
+
+        function randomRgbColor() {
+            let r = randomInteger(255);
+            let g = randomInteger(255);
+            let b = randomInteger(255);
+            return "rgba(" + r + "," + g + "," + b + ",0.5)";
+        }
+
+        function randomInteger(max) {
+            return Math.floor(Math.random() * (max + 1));
+        } 
+    </script>
+</body>
+
+</html>
